@@ -1,0 +1,39 @@
+// importing packages
+import java.net.*;
+import java.io.*;
+
+public class ServerTCP
+{
+    public static void main(String[] args)
+    {
+        try {
+            ServerSocket server = new ServerSocket(9999);
+            System.out.println("Server started on port 9999");
+
+            System.out.println("waiting for the client");
+
+            Socket socket = server.accept();
+            System.out.println("Client Connected");
+
+            DataInputStream in = new DataInputStream(socket.getInputStream());
+            DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+
+                //String operator = in.readUTF();
+                // input of two values basically
+                int val1 = in.readInt();
+                int val2 = in.readInt();
+
+                int result = 0;
+                int result2 = 0;
+
+                result = val1 * val2;
+                result2 = val1+val2;
+
+                out.writeInt(result);
+                out.writeInt(result2);
+        }
+        catch(Exception e){
+            System.out.println("Error");
+        }
+    }
+}
